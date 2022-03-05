@@ -1,8 +1,8 @@
 //
 //  Device+CoreDataProperties.swift
-//  
+//  PackageTestMAC
 //
-//  Created by Klaus-Dieter Reiners on 20.11.21.
+//  Created by Klaus-Dieter Reiners on 05.03.22.
 //
 //
 
@@ -26,7 +26,6 @@ extension Device {
     @NSManaged public var hk_udiDeviceIdentifier: String?
     @NSManaged public var isdefault: Bool
     @NSManaged public var uuid: UUID?
-    @NSManaged public var friendlyname: String?
     @NSManaged public var device2Logs: NSSet?
 
 }
@@ -45,5 +44,9 @@ extension Device {
 
     @objc(removeDevice2Logs:)
     @NSManaged public func removeFromDevice2Logs(_ values: NSSet)
+
+}
+
+extension Device : Identifiable {
 
 }

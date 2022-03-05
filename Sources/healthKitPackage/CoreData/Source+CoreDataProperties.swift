@@ -1,8 +1,8 @@
 //
 //  Source+CoreDataProperties.swift
-//  
+//  PackageTestMAC
 //
-//  Created by Klaus-Dieter Reiners on 20.11.21.
+//  Created by Klaus-Dieter Reiners on 05.03.22.
 //
 //
 
@@ -23,7 +23,6 @@ extension Source {
     @NSManaged public var hk_version: String?
     @NSManaged public var isdefault: Bool
     @NSManaged public var uuid: UUID?
-    @NSManaged public var friendlyname: String?
     @NSManaged public var source2logs: NSSet?
 
 }
@@ -42,5 +41,9 @@ extension Source {
 
     @objc(removeSource2logs:)
     @NSManaged public func removeFromSource2logs(_ values: NSSet)
+
+}
+
+extension Source : Identifiable {
 
 }

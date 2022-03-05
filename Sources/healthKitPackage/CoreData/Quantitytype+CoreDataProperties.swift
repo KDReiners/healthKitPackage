@@ -1,8 +1,8 @@
 //
 //  Quantitytype+CoreDataProperties.swift
-//  
+//  PackageTestMAC
 //
-//  Created by Klaus-Dieter Reiners on 22.01.22.
+//  Created by Klaus-Dieter Reiners on 05.03.22.
 //
 //
 
@@ -16,11 +16,11 @@ extension Quantitytype {
         return NSFetchRequest<Quantitytype>(entityName: "Quantitytype")
     }
 
-    @NSManaged public var hk_quantitytype: String?
     @NSManaged public var friendlyname: String?
+    @NSManaged public var hk_quantitytype: String?
     @NSManaged public var preferredUnit: String?
-    @NSManaged public var uuid: UUID?
     @NSManaged public var showInUI: Bool
+    @NSManaged public var uuid: UUID?
     @NSManaged public var quantitytype2logs: NSSet?
 
 }
@@ -39,5 +39,9 @@ extension Quantitytype {
 
     @objc(removeQuantitytype2logs:)
     @NSManaged public func removeFromQuantitytype2logs(_ values: NSSet)
+
+}
+
+extension Quantitytype : Identifiable {
 
 }
