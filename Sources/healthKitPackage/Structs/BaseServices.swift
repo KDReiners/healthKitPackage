@@ -13,7 +13,7 @@ public struct BaseServices
     public static let logger = {
         return Logger()
     }()
-    internal static let standardDateFormatter: DateFormatter = {
+    public static let standardDateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .short
         formatter.timeStyle = .medium
