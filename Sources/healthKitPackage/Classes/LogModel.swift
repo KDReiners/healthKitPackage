@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 public class LogModel: Model<Log> {
     @Published var result: [Log]!
-    @Published var categories: [Tree<Log>] = []
+    @Published public var categories: [Tree<Log>] = []
     @Published var sources = Array<Source>()
     @Published var devices = Array<Device>()
     
