@@ -8,7 +8,7 @@
 import Foundation
 public class QuantityTypeModel: Model<Quantitytype> {
     @Published var result: [Quantitytype]!
-    init() {
+    public init() {
         let readOnlyFields = ["id", "preferredUnit", "hk_quantitytype"]
         super.init(readOnlyFields: readOnlyFields)
     }

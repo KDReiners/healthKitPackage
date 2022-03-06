@@ -8,7 +8,7 @@
 import Foundation
 public class DeviceModel: Model<Device> {
     @Published var result: [Device]!
-    init() {
+    public init() {
         let readOnlyFields = [  "hk_firmwareVersion", "hk_hardwareVersion", "hk_localIdentifier",
                                 "hk_manufacturer", "hk_model", "hk_softwareVersion",
                                 "hk_udiDeviceIdentifier", "uuid"]

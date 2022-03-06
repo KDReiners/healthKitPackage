@@ -8,7 +8,7 @@
 import Foundation
 public class SourceModel: Model<Source> {
     @Published var result: [Source]!
-    init() {
+    public init() {
         let readOnlyFields = [  "hk_bundleIdentifier", "hk_name", "hk_operatingSystemVersion"
                                 , "hk_productType", "hk_version", "uuid"]
         super.init(readOnlyFields: readOnlyFields)
