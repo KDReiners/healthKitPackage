@@ -6,7 +6,7 @@
 //
 
 import Foundation
-class SourceModel: Model<Source> {
+public class SourceModel: Model<Source> {
     @Published var result: [Source]!
     init() {
         let readOnlyFields = [  "hk_bundleIdentifier", "hk_name", "hk_operatingSystemVersion"
