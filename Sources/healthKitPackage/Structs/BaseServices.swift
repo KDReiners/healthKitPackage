@@ -8,7 +8,7 @@
 import Foundation
 import OSLog
 import CoreData
-struct BaseServices
+public struct BaseServices
 {
     internal static let logger = {
         return Logger()

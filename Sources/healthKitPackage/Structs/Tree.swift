@@ -6,7 +6,7 @@
 //
 
 import Foundation
-struct Tree<Value: Hashable> {
+public struct Tree<Value: Hashable> {
     let value: Value
     var children: [Tree]? = nil
 }

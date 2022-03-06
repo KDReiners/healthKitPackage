@@ -6,6 +6,6 @@
 //
 
 import Foundation
-struct DependantEntry {
+public struct DependantEntry {
     
 }
