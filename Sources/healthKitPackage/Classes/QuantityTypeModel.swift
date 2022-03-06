@@ -12,7 +12,7 @@ public class QuantityTypeModel: Model<Quantitytype> {
         let readOnlyFields = ["id", "preferredUnit", "hk_quantitytype"]
         super.init(readOnlyFields: readOnlyFields)
     }
-    override var items: [Quantitytype] {
+    override public var items: [Quantitytype] {
         get {
             return result
         }

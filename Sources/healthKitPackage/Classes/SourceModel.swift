@@ -13,7 +13,7 @@ public class SourceModel: Model<Source> {
                                 , "hk_productType", "hk_version", "uuid"]
         super.init(readOnlyFields: readOnlyFields)
     }
-    override var items: [Source] {
+    override public var items: [Source] {
         get {
             return result
         }

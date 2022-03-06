@@ -14,7 +14,7 @@ public class DeviceModel: Model<Device> {
                                 "hk_udiDeviceIdentifier", "uuid"]
         super.init(readOnlyFields: readOnlyFields)
     }
-    override var items: [Device] {
+    override public var items: [Device] {
         get {
             return result
         }

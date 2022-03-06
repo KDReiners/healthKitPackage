@@ -18,7 +18,7 @@ public class LogModel: Model<Log> {
         let readOnlyFields = [""]
         super.init(readOnlyFields: readOnlyFields)
     }
-    override var items: [Log] {
+    override public var items: [Log] {
         get {
             return result
         }
