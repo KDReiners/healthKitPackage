@@ -7,6 +7,6 @@
 
 import Foundation
 public struct Tree<Value: Hashable> {
-    let value: Value
-    var children: [Tree]? = nil
+    public let value: Value
+    public var children: [Tree]? = nil
 }
