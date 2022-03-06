@@ -1,39 +1,49 @@
-//
-//  Persistence.swift
-//  healthKitConnector
-//
-//  Created by Klaus-Dieter Reiners on 21.03.21.
-//
+// Create a subclass of NSPersistentStore Coordinator
 
 import CoreData
-
-public class PersistenceController {
+open class PersistentCloudKitContainer: NSPersistentCloudKitContainer {
+}
     
-    static let shared = PersistenceController()
-    static var preview: PersistenceController = {
-        let result = PersistenceController()
-        let viewContext = result.cloudContainer.viewContext
-        do {
-            try viewContext.save()
-        } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            let nsError = error as NSError
-            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-        }
+public var persistentCloudKitContainer: PersistentCloudKitContainer? = {
+        guard let modelURL = Bundle.module.url(forResource:"healthKitConnector", withExtension: "momd") else { return  nil }
+        guard let model = NSManagedObjectModel(contentsOf: modelURL) else { return nil }
+        let container = PersistentCloudKitContainer(name:"healthKitConnector",managedObjectModel:model)
+//        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+//            if let error = error as NSError? {
+//                print("Unresolved error \(error), \(error.userInfo)")
+//            }
+//        })
+        return container
+    }()
+public struct PersistenceController {
+    public static let shared = PersistenceController()
+    public static var preview: PersistenceController = {
+        let result = PersistenceController(inMemory: true)
+        let viewContext = result.container.viewContext
+//        for _ in 0..<10 {
+//            let newItem = Log(context: viewContext)
+//            newItem.timeStamp = Date()
+//        }
+//        do {
+//            try viewContext.save()
+//        } catch {
+//            // Replace this implementation with code to handle the error appropriately.
+//            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+//            let nsError = error as NSError
+//            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+//        }
         return result
     }()
 
-    let cloudContainer: NSPersistentCloudKitContainer
-    
-    init() {
-        let bundle = Bundle.module
-         let modelURL = bundle.url(forResource: "healthKitConnector", withExtension: ".momd")!
-         let model = NSManagedObjectModel(contentsOf: modelURL)!
-         cloudContainer = NSPersistentCloudKitContainer(name: "healthKitConnector", managedObjectModel: model)
-        
-//        cloudContainer = NSPersistentCloudKitContainer(name: "healthKitConnector")
-        cloudContainer.loadPersistentStores(completionHandler: { (storeDescription, error) in
+    public let container: NSPersistentCloudKitContainer
+
+    public init(inMemory: Bool = false) {
+        container = persistentCloudKitContainer!
+        if inMemory {
+            container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
+        }
+        container.viewContext.automaticallyMergesChangesFromParent = true
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
@@ -49,7 +59,7 @@ public class PersistenceController {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
-        cloudContainer.viewContext.automaticallyMergesChangesFromParent = true
-        cloudContainer.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+        container.viewContext.automaticallyMergesChangesFromParent = true
+        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
     }
 }

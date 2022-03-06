@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 public class LogModel: Model<Log> {
     @Published var result: [Log]!
     @Published var categories: [Tree<Log>] = []

@@ -8,7 +8,7 @@ import CoreData
 import Combine
 public class Model<T>: GenericViewModel where T: NSManagedObject {
     var items: [T] = []
-    let context = PersistenceController.shared.cloudContainer.viewContext
+    let context = PersistenceController.shared.container.viewContext
     var attributes: Array<EntityAttributeInfo> = BaseServices.getAttributesForEntity(entity: T.self.entity())
     var readOnlyAttributes: Array<EntityAttributeInfo> = []
     var readWriteAttributes: Array<EntityAttributeInfo> = []
@@ -25,5 +25,11 @@ public class Model<T>: GenericViewModel where T: NSManagedObject {
             self.items = items
         }
         BaseServices.returnAttributeCluster(readOnlyFields: readOnlyFields, attributes: &attributes, readOnlyAttributes: &readOnlyAttributes, readWriteAttributes: &readWriteAttributes)
+    }
+    internal func deleteAllRecords() -> Void {
+        items.forEach { item in
+            context.delete(item)
+        }
+        try? context.save()
     }
 }
