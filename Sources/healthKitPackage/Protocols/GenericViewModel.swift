@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol GenericViewModel: ObservableObject {
+public protocol GenericViewModel: ObservableObject {
     associatedtype T
     var items: [T] { get set }
     var attributes: Array<EntityAttributeInfo> { get }

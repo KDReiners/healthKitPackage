@@ -7,11 +7,11 @@
 import CoreData
 import Combine
 public class Model<T>: GenericViewModel where T: NSManagedObject {
-    var items: [T] = []
+    public var items: [T] = []
     let context = PersistenceController.shared.container.viewContext
-    var attributes: Array<EntityAttributeInfo> = BaseServices.getAttributesForEntity(entity: T.self.entity())
-    var readOnlyAttributes: Array<EntityAttributeInfo> = []
-    var readWriteAttributes: Array<EntityAttributeInfo> = []
+    public var attributes: Array<EntityAttributeInfo> = BaseServices.getAttributesForEntity(entity: T.self.entity())
+    public var readOnlyAttributes: Array<EntityAttributeInfo> = []
+    public var readWriteAttributes: Array<EntityAttributeInfo> = []
     var readOnlyFields: [String] = []
     private var deviceCancellable: AnyCancellable?
     init(readOnlyFields: [String]){
