@@ -13,7 +13,7 @@ public class LogModel: Model<Log> {
     @Published var sources = Array<Source>()
     @Published var devices = Array<Device>()
     
-    internal var filterInterval: DateInterval!
+    public var filterInterval: DateInterval!
     public init() {
         let readOnlyFields = [""]
         super.init(readOnlyFields: readOnlyFields)
@@ -29,7 +29,7 @@ public class LogModel: Model<Log> {
 //            fillRelations()
         }
     }
-    internal func getLimits() -> DateInterval {
+    public func getLimits() -> DateInterval {
         if self.items.count>0 {
             let startDate = (self.items.max(by: { x, y in x.timeStamp! > x.timeStamp! })?.timeStamp!)!
             let endDate = (self.items.min(by: { x, y in x.timeStamp! > y.timeStamp! })?.timeStamp!)!
@@ -38,7 +38,7 @@ public class LogModel: Model<Log> {
         return DateInterval(start: Date(), end: Date())
     }
     
-    internal func applyLimits() {
+    public func applyLimits() {
         let filteredItems = self.items.filter { item in
             if item.timeStamp! >= filterInterval.start && item.timeStamp! <= filterInterval.end {
                 return true
