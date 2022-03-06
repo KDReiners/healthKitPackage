@@ -6,7 +6,7 @@
 //
 
 import Foundation
-class QuantityTypeModel: Model<Quantitytype> {
+public class QuantityTypeModel: Model<Quantitytype> {
     @Published var result: [Quantitytype]!
     init() {
         let readOnlyFields = ["id", "preferredUnit", "hk_quantitytype"]
