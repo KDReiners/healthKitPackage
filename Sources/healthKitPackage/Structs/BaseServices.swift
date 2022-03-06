@@ -10,7 +10,7 @@ import OSLog
 import CoreData
 public struct BaseServices
 {
-    internal static let logger = {
+    public static let logger = {
         return Logger()
     }()
     internal static let standardDateFormatter: DateFormatter = {
@@ -19,7 +19,7 @@ public struct BaseServices
         formatter.timeStyle = .medium
         return formatter
     }()
-    internal static func getAttributesForEntity(entity: NSEntityDescription) -> Array<EntityAttributeInfo> {
+    public static func getAttributesForEntity(entity: NSEntityDescription) -> Array<EntityAttributeInfo> {
         var result = Array<EntityAttributeInfo>()
         let attributes = entity.attributesByName
         attributes.forEach { attribute in
@@ -29,7 +29,7 @@ public struct BaseServices
         return result
         
     }
-    internal static func returnAttributeCluster(readOnlyFields: [String], attributes: inout [EntityAttributeInfo], readOnlyAttributes: inout [EntityAttributeInfo], readWriteAttributes: inout [EntityAttributeInfo] ) -> Void {
+    public static func returnAttributeCluster(readOnlyFields: [String], attributes: inout [EntityAttributeInfo], readOnlyAttributes: inout [EntityAttributeInfo], readWriteAttributes: inout [EntityAttributeInfo] ) -> Void {
         for i in 0..<attributes.count {
             
             for readOnly in readOnlyFields {
