@@ -6,7 +6,7 @@
 //
 
 public struct EntityAttributeInfo {
-    internal var key: String
-    internal var value: String
-    internal var readOnly = false
+    public var key: String
+    public var value: String
+    public var readOnly = false
 }
