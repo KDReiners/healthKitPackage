@@ -35,7 +35,7 @@ public struct PersistenceController {
         return result
     }()
 
-    public let container: NSPersistentCloudKitContainer
+    public let container: PersistentCloudKitContainer
 
     public init(inMemory: Bool = false) {
         container = persistentCloudKitContainer!
