@@ -32,7 +32,7 @@ public class Model<T>: GenericViewModel where T: NSManagedObject {
         }
         try? context.save()
     }
-    internal func insertRecord() -> T {
+    public func insertRecord() -> T {
         return NSEntityDescription.insertNewObject(forEntityName: T.entity().name!, into: context) as! T
     }
 }
