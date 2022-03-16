@@ -37,4 +37,7 @@ public class Model<T>: GenericViewModel where T: NSManagedObject {
         try? context.save()
         return result
     }
+    public func saveRecords() -> Void {
+        try? context.save()
+    }
 }
