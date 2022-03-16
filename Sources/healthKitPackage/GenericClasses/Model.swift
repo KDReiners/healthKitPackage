@@ -37,7 +37,10 @@ public class Model<T>: GenericViewModel where T: NSManagedObject {
         try? context.save()
         return result
     }
-    public func saveRecords() -> Void {
+    public func deleteRecord(record: T) -> Void {
+        context.delete(record)
+    }
+    public func saveChanges() -> Void {
         try? context.save()
     }
 }
