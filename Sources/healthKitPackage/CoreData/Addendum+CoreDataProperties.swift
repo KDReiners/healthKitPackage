@@ -2,7 +2,7 @@
 //  Addendum+CoreDataProperties.swift
 //  healthKitPackage
 //
-//  Created by Klaus-Dieter Reiners on 16.03.22.
+//  Created by Klaus-Dieter Reiners on 17.03.22.
 //
 //
 
@@ -16,9 +16,10 @@ extension Addendum {
         return NSFetchRequest<Addendum>(entityName: "Addendum")
     }
 
-    @NSManaged public var timestamp: Date?
-    @NSManaged public var longitude: Double
     @NSManaged public var latitude: Double
+    @NSManaged public var longitude: Double
+    @NSManaged public var timestamp: Date?
+    @NSManaged public var name: String?
     @NSManaged public var addendum2addendumtype: Addendumtype?
 
 }

@@ -3,6 +3,7 @@
     <entity name="Addendum" representedClassName="Addendum" syncable="YES">
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="addendum2addendumtype" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Addendumtype" inverseName="addendumtype2addendums" inverseEntity="Addendumtype"/>
     </entity>
@@ -58,11 +59,11 @@
         <relationship name="source2logs" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Log" inverseName="log2source" inverseEntity="Log"/>
     </entity>
     <elements>
+        <element name="Addendum" positionX="-261" positionY="-180" width="128" height="104"/>
+        <element name="Addendumtype" positionX="-252" positionY="-171" width="128" height="59"/>
         <element name="Device" positionX="-43.8695068359375" positionY="-264.2937469482422" width="128" height="194"/>
         <element name="Log" positionX="-267.0009155273438" positionY="-354.2608795166016" width="128" height="239"/>
         <element name="Quantitytype" positionX="-484.8496704101562" positionY="-248.0467681884766" width="128" height="119"/>
         <element name="Source" positionX="-259.8517456054688" positionY="-164.2729949951172" width="128" height="149"/>
-        <element name="Addendum" positionX="-261" positionY="-180" width="128" height="89"/>
-        <element name="Addendumtype" positionX="-252" positionY="-171" width="128" height="59"/>
     </elements>
 </model>
