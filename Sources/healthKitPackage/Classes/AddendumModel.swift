@@ -18,7 +18,7 @@ public class AddendumModel: Model<Addendum> {
         }
         set
         {
-            result = newValue.sorted(by: { $1.timestamp! > $0.timestamp!})
+            result = newValue.sorted(by: { $1.timestamp ?? Date() > $0.timestamp ?? Date()})
         }
     }
 }
