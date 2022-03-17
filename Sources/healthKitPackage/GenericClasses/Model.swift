@@ -26,7 +26,7 @@ public class Model<T>: GenericViewModel where T: NSManagedObject {
         }
         BaseServices.returnAttributeCluster(readOnlyFields: readOnlyFields, attributes: &attributes, readOnlyAttributes: &readOnlyAttributes, readWriteAttributes: &readWriteAttributes)
     }
-    internal func deleteAllRecords() -> Void {
+    public func deleteAllRecords() -> Void {
         items.forEach { item in
             context.delete(item)
         }
