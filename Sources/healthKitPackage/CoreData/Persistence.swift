@@ -5,7 +5,6 @@ open class PersistentCloudKitContainer: NSPersistentCloudKitContainer {
 }
     
 public var persistentCloudKitContainer: PersistentCloudKitContainer? = {
-    print ("Init persistentCloudKitContainer")
         guard let modelURL = Bundle.module.url(forResource:"healthKitConnector", withExtension: "momd") else { return  nil }
         guard let model = NSManagedObjectModel(contentsOf: modelURL) else { return nil }
         let container = PersistentCloudKitContainer(name:"healthKitConnector",managedObjectModel:model)
@@ -18,8 +17,8 @@ public var persistentCloudKitContainer: PersistentCloudKitContainer? = {
     }()
 public struct PersistenceController {
     public static let shared = PersistenceController()
+    print("Init persistenceController)
     public static var preview: PersistenceController = {
-        print("Perview")
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
 //        for _ in 0..<10 {
@@ -38,13 +37,12 @@ public struct PersistenceController {
     }()
 
     public let container: PersistentCloudKitContainer
-    
+
     public init(inMemory: Bool = false) {
         container = persistentCloudKitContainer!
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         }
-//        container.viewContext.automaticallyMergesChangesFromParent = true
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.
@@ -61,7 +59,7 @@ public struct PersistenceController {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
-//        container.viewContext.automaticallyMergesChangesFromParent = true
-//        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+        container.viewContext.automaticallyMergesChangesFromParent = true
+        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
     }
 }
