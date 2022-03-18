@@ -5,6 +5,7 @@ open class PersistentCloudKitContainer: NSPersistentCloudKitContainer {
 }
     
 public var persistentCloudKitContainer: PersistentCloudKitContainer? = {
+    print ("Init persistentCloudKitContainer")
         guard let modelURL = Bundle.module.url(forResource:"healthKitConnector", withExtension: "momd") else { return  nil }
         guard let model = NSManagedObjectModel(contentsOf: modelURL) else { return nil }
         let container = PersistentCloudKitContainer(name:"healthKitConnector",managedObjectModel:model)
@@ -18,6 +19,7 @@ public var persistentCloudKitContainer: PersistentCloudKitContainer? = {
 public struct PersistenceController {
     public static let shared = PersistenceController()
     public static var preview: PersistenceController = {
+        print("Perview")
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
 //        for _ in 0..<10 {
@@ -36,7 +38,7 @@ public struct PersistenceController {
     }()
 
     public let container: PersistentCloudKitContainer
-
+    
     public init(inMemory: Bool = false) {
         container = persistentCloudKitContainer!
         if inMemory {
