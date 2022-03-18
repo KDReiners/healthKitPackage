@@ -18,7 +18,7 @@ public class AddendumTypeModel: Model<Addendumtype> {
         }
         set
         {
-            result = newValue.sorted(by: { $1.name! > $0.name!})
+            result = newValue.sorted(by: { $1.name ?? "unknown" > $0.name ?? "unknown"})
         }
     }
 }
