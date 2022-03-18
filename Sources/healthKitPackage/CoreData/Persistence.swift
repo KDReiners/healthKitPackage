@@ -17,7 +17,6 @@ public var persistentCloudKitContainer: PersistentCloudKitContainer? = {
     }()
 public struct PersistenceController {
     public static let shared = PersistenceController()
-    print("Init persistenceController)
     public static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
@@ -40,6 +39,7 @@ public struct PersistenceController {
 
     public init(inMemory: Bool = false) {
         container = persistentCloudKitContainer!
+        print("Init persistenceController")
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         }
