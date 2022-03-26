@@ -44,7 +44,7 @@ public struct PersistenceController {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         }
 #if os(watchOS)
-        container.persistentStoreDescriptions.first.configuration = "Watch"
+        container.persistentStoreDescriptions.first!.configuration = "Watch"
 #endif
 
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
