@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="20G417" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="20G527" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="Addendum" representedClassName="Addendum" syncable="YES">
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
@@ -58,6 +58,10 @@
         <attribute name="uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <relationship name="source2logs" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Log" inverseName="log2source" inverseEntity="Log"/>
     </entity>
+    <configuration name="Watch" usedWithCloudKit="YES">
+        <memberEntity name="Addendum"/>
+        <memberEntity name="Addendumtype"/>
+    </configuration>
     <elements>
         <element name="Addendum" positionX="-261" positionY="-180" width="128" height="104"/>
         <element name="Addendumtype" positionX="-252" positionY="-171" width="128" height="59"/>

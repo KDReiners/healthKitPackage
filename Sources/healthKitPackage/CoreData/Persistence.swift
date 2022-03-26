@@ -43,6 +43,11 @@ public struct PersistenceController {
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         }
+#if os(watchOS)
+        let persistentStoreDescription = NSPersistentStoreDescription(url: URL(fileURLWithPath: "/dev/null"))
+        persistentStoreDescription.configuration = "Watch"
+#endif
+
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.
@@ -60,6 +65,6 @@ public struct PersistenceController {
             }
         })
         container.viewContext.automaticallyMergesChangesFromParent = true
-//        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
     }
 }
