@@ -24,6 +24,27 @@
         <attribute name="uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <relationship name="device2Logs" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Log" inverseName="log2Device" inverseEntity="Log"/>
     </entity>
+    <entity name="Libre3primanota" representedClassName="Libre3primanota" syncable="YES">
+        <attribute name="carbohydratesservings" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="carbohydratesunits" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="correctioninsulinunits" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="depotinsulinunits" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="device" optional="YES" attributeType="String"/>
+        <attribute name="devicetimestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="glucosescan" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="glucosespathway" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="glucoseteststrips" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="insulinchangebyuserUnits" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="ketoneunits" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="mealinsulinunits" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="nonnumericdepotinsulin" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="nonnumericfooddata" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="nonnumericrapidactinginsulin" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="notes" optional="YES" attributeType="String"/>
+        <attribute name="rapidactinginsulin" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="recordingtype" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="serialnumber" optional="YES" attributeType="String"/>
+    </entity>
     <entity name="Log" representedClassName="Log" syncable="YES">
         <attribute name="maxValue" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="minValue" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
@@ -58,6 +79,9 @@
         <attribute name="uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <relationship name="source2logs" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Log" inverseName="log2source" inverseEntity="Log"/>
     </entity>
+    <configuration name="Mac">
+        <memberEntity name="Libre3primanota"/>
+    </configuration>
     <configuration name="Watch" usedWithCloudKit="YES">
         <memberEntity name="Addendum"/>
         <memberEntity name="Addendumtype"/>
@@ -66,6 +90,7 @@
         <element name="Addendum" positionX="-261" positionY="-180" width="128" height="104"/>
         <element name="Addendumtype" positionX="-252" positionY="-171" width="128" height="59"/>
         <element name="Device" positionX="-43.8695068359375" positionY="-264.2937469482422" width="128" height="194"/>
+        <element name="Libre3primanota" positionX="-279" positionY="-198" width="128" height="314"/>
         <element name="Log" positionX="-267.0009155273438" positionY="-354.2608795166016" width="128" height="239"/>
         <element name="Quantitytype" positionX="-484.8496704101562" positionY="-248.0467681884766" width="128" height="119"/>
         <element name="Source" positionX="-259.8517456054688" positionY="-164.2729949951172" width="128" height="149"/>
