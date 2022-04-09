@@ -45,7 +45,7 @@ public struct BaseServices
             return $0.key < $1.key
         }
     }
-    internal static func convertToStandardDate(dateString: String) -> Date! {
+    public static func convertToStandardDate(dateString: String) -> Date! {
         let format = DateFormatter()
         format.timeZone = .current
         format.dateFormat = "dd-MM-yyyy HH:mm"
