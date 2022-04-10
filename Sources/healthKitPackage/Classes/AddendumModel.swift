@@ -9,9 +9,11 @@ import Foundation
 import SwiftUI
 public class AddendumModel: Model<Addendum> {
     @Published var result: [Addendum]!
+    @Published var items2Scans = [item2Scans]()
     public init() {
         let readOnlyFields: [String] = []
         super.init(readOnlyFields: readOnlyFields)
+        attachItems2Scans()
     }
     override public var items: [Addendum] {
         get {
@@ -22,15 +24,25 @@ public class AddendumModel: Model<Addendum> {
             result = newValue.sorted(by: { $1.timestamp ?? Date() > $0.timestamp ?? Date()})
         }
     }
-    public func getAttachedLibreLogs() {
+    private func attachItems2Scans() {
         let libreViewModel = Libre3Model()
         var attachedScans = [Libre3primanota]()
         self.items.sorted(by: {$1.timestamp ?? Date() < $0.timestamp ?? Date()}).forEach { addendum in
-            var newTree = Tree(value: addendum, children: [Tree<Addendum>]())
             let children = libreViewModel.items.filter { scan in
                 return ( scan.devicetimestamp! > addendum.timestamp! && attachedScans.contains(scan) == false )
             }
-            attachedScans.append(contentsOf: children)
+            if children.count > 0 {
+                var newRelation = item2Scans()
+                newRelation.item = addendum
+                newRelation.children = children
+                items2Scans.append(newRelation)
+                attachedScans.append(contentsOf: children)
+            }
         }
     }
+    public struct item2Scans {
+        var item: Addendum?
+        var children = [Libre3primanota]()
+    }
+    
 }
