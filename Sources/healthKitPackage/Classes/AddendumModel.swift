@@ -25,7 +25,7 @@ public class AddendumModel: Model<Addendum> {
     public func getAttachedLibreLogs() {
         let libreViewModel = Libre3Model()
         var attachedScans = [Libre3primanota]()
-        self.items.sorted(by: {$1.timestamp ?? Date() > $0.timestamp ?? Date()}).forEach { addendum in
+        self.items.sorted(by: {$1.timestamp ?? Date() < $0.timestamp ?? Date()}).forEach { addendum in
             var newTree = Tree(value: addendum, children: [Tree<Addendum>]())
             let children = libreViewModel.items.filter { scan in
                 return ( scan.devicetimestamp! > addendum.timestamp! && attachedScans.contains(scan) == false )
