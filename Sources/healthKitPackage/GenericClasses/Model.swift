@@ -14,12 +14,16 @@ public class Model<T>: GenericViewModel where T: NSManagedObject {
     public var readOnlyAttributes: Array<EntityAttributeInfo> = []
     public var readWriteAttributes: Array<EntityAttributeInfo> = []
     private var readOnlyFields: [String] = []
-    var test = NSRelationshipDescription().destinationEntity?.relationships(forDestination: T.self.entity())
+    var entities = NSEntityDescription()
+    var relations: [NSRelationshipDescription]?
+    
+    //T.entityDescription.relationships(forDestination: T.self.entity())
     private var deviceCancellable: AnyCancellable?
     init(readOnlyFields: [String]){
         self.readOnlyFields = readOnlyFields
         BaseServices.returnAttributeCluster(readOnlyFields: readOnlyFields, attributes: &attributes, readOnlyAttributes: &readOnlyAttributes, readWriteAttributes: &readWriteAttributes)
         attachValues()
+        relations = entities.relationships(forDestination: T.self.entity())
     }
     
     func attachValues (devicePublisher: AnyPublisher<[T], Never> = Storage<T>().items.eraseToAnyPublisher()) {
