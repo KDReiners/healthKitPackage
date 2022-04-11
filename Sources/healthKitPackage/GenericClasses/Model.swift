@@ -14,19 +14,15 @@ public class Model<T>: GenericViewModel where T: NSManagedObject {
     public var readOnlyAttributes: Array<EntityAttributeInfo> = []
     public var readWriteAttributes: Array<EntityAttributeInfo> = []
     private var readOnlyFields: [String] = []
-    private var subEntities: [NSEntityDescription]?
-    private var superEntity: NSEntityDescription?
     private var deviceCancellable: AnyCancellable?
     init(readOnlyFields: [String]){
         self.readOnlyFields = readOnlyFields
         BaseServices.returnAttributeCluster(readOnlyFields: readOnlyFields, attributes: &attributes, readOnlyAttributes: &readOnlyAttributes, readWriteAttributes: &readWriteAttributes)
         attachValues()
-        subEntities = T.self.entity().subentities
-        guard T.self.entity().superentity != nil else {
-            return
+        let properties = T.entity().propertiesByName
+        properties.forEach { property in
+        
         }
-        superEntity = T.self.entity().superentity
-    
     }
     
     func attachValues (devicePublisher: AnyPublisher<[T], Never> = Storage<T>().items.eraseToAnyPublisher()) {
