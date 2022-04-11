@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+import CoreData
 public protocol GenericViewModel: ObservableObject {
     associatedtype T
     var items: [T] { get set }
@@ -14,4 +14,6 @@ public protocol GenericViewModel: ObservableObject {
     var readOnlyAttributes: Array<EntityAttributeInfo> { get }
     var readWriteAttributes: Array<EntityAttributeInfo> { get }
 }
+
+
 
