@@ -21,7 +21,9 @@ public class Model<T>: GenericViewModel where T: NSManagedObject {
         attachValues()
         let properties = T.entity().propertiesByName
         properties.forEach { property in
-        
+            if type(of: property.value) == type(of: NSRelationshipDescription.self) {
+                
+            }
         }
     }
     
