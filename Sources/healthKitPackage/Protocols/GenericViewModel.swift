@@ -13,6 +13,8 @@ public protocol GenericViewModel: ObservableObject {
     var attributes: Array<EntityAttributeInfo> { get }
     var readOnlyAttributes: Array<EntityAttributeInfo> { get }
     var readWriteAttributes: Array<EntityAttributeInfo> { get }
+    var childrenRelations: Array <NSRelationshipDescription> { get }
+    var parent: NSRelationshipDescription? { get }
 }
 
 

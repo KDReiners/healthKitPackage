@@ -13,6 +13,8 @@ public class Model<T>: GenericViewModel where T: NSManagedObject {
     public var attributes: Array<EntityAttributeInfo> = BaseServices.getAttributesForEntity(entity: T.self.entity())
     public var readOnlyAttributes: Array<EntityAttributeInfo> = []
     public var readWriteAttributes: Array<EntityAttributeInfo> = []
+    public var childrenRelations: Array<NSRelationshipDescription> = []
+    public var parent: NSRelationshipDescription?
     private var readOnlyFields: [String] = []
     private var deviceCancellable: AnyCancellable?
     init(readOnlyFields: [String]){
@@ -22,7 +24,11 @@ public class Model<T>: GenericViewModel where T: NSManagedObject {
         let properties = T.entity().propertiesByName
         properties.forEach { property in
             if type(of: property.value) == type(of: NSRelationshipDescription()) {
-                
+                switch (property.value as! NSRelationshipDescription).maxCount {
+                case 0: childrenRelations.append(property.value as! NSRelationshipDescription)
+                case 1: parent = property.value as? NSRelationshipDescription
+                default: return
+                }
             }
         }
     }
