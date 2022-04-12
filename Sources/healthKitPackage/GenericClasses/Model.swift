@@ -6,7 +6,6 @@
 //
 import CoreData
 import Combine
-import AppKit
 public class Model<T>: GenericViewModel where T: NSManagedObject {
     public var items: [T] = []
     let context = PersistenceController.shared.container.viewContext
@@ -14,7 +13,7 @@ public class Model<T>: GenericViewModel where T: NSManagedObject {
     public var readOnlyAttributes: Array<EntityAttributeInfo> = []
     public var readWriteAttributes: Array<EntityAttributeInfo> = []
     public var childrenRelations: Array<NSRelationshipDescription> = []
-    public var parent: NSRelationshipDescription?
+    public var parentRelation: NSRelationshipDescription?
     private var readOnlyFields: [String] = []
     private var deviceCancellable: AnyCancellable?
     init(readOnlyFields: [String]){
@@ -26,14 +25,14 @@ public class Model<T>: GenericViewModel where T: NSManagedObject {
             if type(of: property.value) == type(of: NSRelationshipDescription()) {
                 switch (property.value as! NSRelationshipDescription).maxCount {
                 case 0: childrenRelations.append(property.value as! NSRelationshipDescription)
-                case 1: parent = property.value as? NSRelationshipDescription
+                case 1: parentRelation = property.value as? NSRelationshipDescription
                 default: return
                 }
             }
         }
     }
     
-    func attachValues (devicePublisher: AnyPublisher<[T], Never> = Storage<T>().items.eraseToAnyPublisher()) {
+    private func attachValues (devicePublisher: AnyPublisher<[T], Never> = Storage<T>().items.eraseToAnyPublisher()) {
         deviceCancellable = devicePublisher.sink { items in
             self.items = items
         }
