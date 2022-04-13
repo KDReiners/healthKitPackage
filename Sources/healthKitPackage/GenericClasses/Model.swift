@@ -31,7 +31,12 @@ public class Model<T>: GenericViewModel where T: NSManagedObject {
             }
         }
     }
-    
+    static func getAttributes(entity: NSEntityDescription)
+    {
+        var result = [String : NSAttributeDescription]()
+        entity.attributesByName.forEach { attribute in
+        }
+    }
     private func attachValues (devicePublisher: AnyPublisher<[T], Never> = Storage<T>().items.eraseToAnyPublisher()) {
         deviceCancellable = devicePublisher.sink { items in
             self.items = items
