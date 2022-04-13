@@ -31,7 +31,7 @@ public class Model<T>: GenericViewModel where T: NSManagedObject {
             }
         }
     }
-    static func getAttributes(entity: NSEntityDescription)
+    static public func getAttributes(entity: NSEntityDescription)
     {
         var result = [String : NSAttributeDescription]()
         entity.attributesByName.forEach { attribute in
