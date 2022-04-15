@@ -31,11 +31,11 @@ public class Model<T>: GenericViewModel where T: NSManagedObject {
             }
         }
     }
-    static public func getAttributes(entity: NSEntityDescription) -> [String: NSAttributeDescription]
+    static public func getProperties(entity: NSEntityDescription) -> [String: NSPropertyDescription]
     {
-        var result = [String : NSAttributeDescription]()
-        entity.attributesByName.forEach { attribute in
-            result[attribute.key] = attribute.value
+        var result = [String : NSPropertyDescription]()
+        entity.propertiesByName.forEach { property in
+            result[property.key] =  property.value
         }
         return result
     }
