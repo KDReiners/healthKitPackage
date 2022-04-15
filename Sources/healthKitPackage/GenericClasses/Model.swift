@@ -31,7 +31,7 @@ public class Model<T>: GenericViewModel where T: NSManagedObject {
             }
         }
     }
-    public func getAttributes() -> [String]
+    public static func getAttributes() -> [String]
     {
         return T.entity().attributesByName.enumerated().map { $0.element.key }
     }
