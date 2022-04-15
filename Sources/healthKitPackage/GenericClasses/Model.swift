@@ -33,7 +33,7 @@ public class Model<T>: GenericViewModel where T: NSManagedObject {
     }
     public static func getAttributes(entity: NSEntityDescription) -> [String]
     {
-        return T.entity().attributesByName.enumerated().map { $0.element.key }
+        return entity.attributesByName.enumerated().map { $0.element.key }
     }
     private func attachValues (devicePublisher: AnyPublisher<[T], Never> = Storage<T>().items.eraseToAnyPublisher()) {
         deviceCancellable = devicePublisher.sink { items in
