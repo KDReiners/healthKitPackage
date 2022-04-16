@@ -13,6 +13,7 @@ public class Model<T>: GenericViewModel where T: NSManagedObject {
     public var readOnlyAttributes: Array<EntityAttributeInfo> = []
     public var readWriteAttributes: Array<EntityAttributeInfo> = []
     public var childrenRelations: Array<NSRelationshipDescription> = []
+    public var childrenClasses: Array<Model> = []
     public var parentRelation: NSRelationshipDescription?
     private var readOnlyFields: [String] = []
     private var deviceCancellable: AnyCancellable?
@@ -30,10 +31,17 @@ public class Model<T>: GenericViewModel where T: NSManagedObject {
                 }
             }
         }
+        fillChildrenClasses()
     }
     public static func getAttributes(entity: NSEntityDescription) -> [String]
     {
         return entity.attributesByName.enumerated().map { $0.element.key }
+    }
+    private func fillChildrenClasses() -> Void {
+        childrenRelations.forEach { relation in
+            var className = "healthKitPackage." + relation.className + "Model"
+            var newClass = NSClassFromString(className)
+        }
     }
     private func attachValues (devicePublisher: AnyPublisher<[T], Never> = Storage<T>().items.eraseToAnyPublisher()) {
         deviceCancellable = devicePublisher.sink { items in
