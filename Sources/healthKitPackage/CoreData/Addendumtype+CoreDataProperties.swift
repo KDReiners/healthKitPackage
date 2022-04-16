@@ -1,8 +1,8 @@
 //
 //  Addendumtype+CoreDataProperties.swift
-//  healthKitPackage
+//  
 //
-//  Created by Klaus-Dieter Reiners on 16.03.22.
+//  Created by Klaus-Dieter Reiners on 16.04.22.
 //
 //
 
