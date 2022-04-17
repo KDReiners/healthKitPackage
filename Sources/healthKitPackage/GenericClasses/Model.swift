@@ -21,27 +21,6 @@ public class Model<T>: GenericViewModel where T: NSManagedObject {
         self.readOnlyFields = readOnlyFields
         BaseServices.returnAttributeCluster(readOnlyFields: readOnlyFields, attributes: &attributes, readOnlyAttributes: &readOnlyAttributes, readWriteAttributes: &readWriteAttributes)
         attachValues()
-        let properties = T.entity().propertiesByName
-        properties.forEach { property in
-            if type(of: property.value) == type(of: NSRelationshipDescription()) {
-                switch (property.value as! NSRelationshipDescription).maxCount {
-                case 0: childrenRelations.append(property.value as! NSRelationshipDescription)
-                case 1: parentRelation = property.value as? NSRelationshipDescription
-                default: return
-                }
-            }
-        }
-        fillChildrenClasses()
-    }
-    public static func getAttributes(entity: NSEntityDescription) -> [String]
-    {
-        return entity.attributesByName.enumerated().map { $0.element.key }
-    }
-    private func fillChildrenClasses() -> Void {
-        childrenRelations.forEach { relation in
-            var className = "healthKitPackage." + relation.className + "Model"
-            var newClass = NSClassFromString(className)
-        }
     }
     private func attachValues (devicePublisher: AnyPublisher<[T], Never> = Storage<T>().items.eraseToAnyPublisher()) {
         deviceCancellable = devicePublisher.sink { items in
