@@ -10,5 +10,6 @@ public class AddendumTimeCapsules: TimeCapsule<Addendum> {
     public typealias T = Addendum
     public init(resolution: Double) {
         super.init(resolution: resolution, logKey: "timestamp", model: AddendumModel())
+        super.slicer()
     }
 }
