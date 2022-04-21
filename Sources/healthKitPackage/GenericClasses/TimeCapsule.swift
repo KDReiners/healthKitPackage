@@ -23,8 +23,8 @@ public class TimeCapsule<T>: GenericTimeCapsule where T: NSManagedObject {
         public var endDate: Date
     }
     public init(resolution: Double, logKey: String, model: Model<T>) {
-        sliceStartDate = BaseServices.convertToStandardDate(dateString: (model.items.first!.value(forKey: logKey) as? String)!)
-        sliceEndDate = BaseServices.convertToStandardDate(dateString:  (model.items.last!.value(forKey: logKey) as? String)!)
+        sliceStartDate = (model.items.first!.value(forKey: logKey) as! Date)
+        sliceEndDate = (model.items.last!.value(forKey: logKey) as! Date)
         self.resolution = resolution
     }
 }
