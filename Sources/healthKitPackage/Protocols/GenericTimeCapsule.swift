@@ -10,4 +10,5 @@ import CoreData
 public protocol GenericTimeCapsule: ObservableObject {
     associatedtype T
     var slices: [T] { get set }
+    func slicer() -> Void
 }

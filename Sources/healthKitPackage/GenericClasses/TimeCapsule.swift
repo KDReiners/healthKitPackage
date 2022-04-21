@@ -9,23 +9,45 @@ import Foundation
 import CoreData
 public class TimeCapsule<T>: GenericTimeCapsule where T: NSManagedObject {
     public var slices: [slice] = []
+    public var model: Model<T>
     public var sliceStartDate: Date
     public var sliceEndDate: Date
     public var resolution: Double
     public var predecessors: Array<slice>! = nil
     public var successor: Array<slice>! = nil
+    public var logKey: String
     public struct slice {
         public var quantityType: String
         public var source: String
         public var device: String
-        public var dateInterval: DateInterval
-        public var startDate: Date
-        public var endDate: Date
+        public var queryDateInterval: DateInterval
+        public var sliceDateInterval: DateInterval
+        public var logDate: Date
+        public var value: Any
     }
     public init(resolution: Double, logKey: String, model: Model<T>) {
         sliceStartDate = (model.items.first!.value(forKey: logKey) as! Date)
         sliceEndDate = (model.items.last!.value(forKey: logKey) as! Date)
         self.resolution = resolution
+        self.model = model
+        self.logKey = logKey
+    }
+    public func slicer() -> Void {
+        var loopStartDate = self.sliceStartDate
+        var loopEndDate = loopStartDate.addingTimeInterval(resolution)
+        model.items.forEach { item in
+            let itemDate = item.value(forKey: self.logKey) as! Date
+            if (itemDate >= loopStartDate &&
+                itemDate < loopStartDate.addingTimeInterval(resolution)) {
+                let newSlice = slice(quantityType: "", source: "", device: "", queryDateInterval: DateInterval(start: self.sliceStartDate, end: self.sliceEndDate), sliceDateInterval: DateInterval(start: loopStartDate, end: loopEndDate),  logDate: itemDate, value: "Any")
+                self.slices.append(newSlice)
+            }
+            else {
+                loopStartDate = loopStartDate.addingTimeInterval(resolution)
+                loopEndDate = loopStartDate.addingTimeInterval(resolution)
+            }
+            
+        }
     }
 }
 
