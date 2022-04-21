@@ -9,6 +9,6 @@ import Foundation
 public class AddendumTimeCapsules: TimeCapsule<Addendum> {
     public typealias T = Addendum
     public init(resolution: Double) {
-        super.init(resolution: resolution, logKey: "timeStamp", model: AddendumModel())
+        super.init(resolution: resolution, logKey: "timestamp", model: AddendumModel())
     }
 }
