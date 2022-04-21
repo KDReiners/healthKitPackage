@@ -35,18 +35,18 @@ public class TimeCapsule<T>: GenericTimeCapsule where T: NSManagedObject {
     public func slicer() -> Void {
         var loopStartDate = self.sliceStartDate
         var loopEndDate = loopStartDate.addingTimeInterval(resolution)
-        model.items.forEach { item in
-            let itemDate = item.value(forKey: self.logKey) as! Date
-            if (itemDate >= loopStartDate &&
-                itemDate < loopStartDate.addingTimeInterval(resolution)) {
+        while loopEndDate <= sliceEndDate {
+            model.items.filter { item in
+                return ((item.value(forKey: self.logKey) as! Date) >= loopStartDate && (item.value(forKey: self.logKey) as! Date) < loopEndDate) == true
+                
+            }.forEach { item in
+                let itemDate = item.value(forKey: self.logKey) as! Date
                 let newSlice = slice(quantityType: "", source: "", device: "", queryDateInterval: DateInterval(start: self.sliceStartDate, end: self.sliceEndDate), sliceDateInterval: DateInterval(start: loopStartDate, end: loopEndDate),  logDate: itemDate, value: "Any")
-                self.slices.append(newSlice)
+                    self.slices.append(newSlice)
+                
             }
-            else {
-                loopStartDate = loopStartDate.addingTimeInterval(resolution)
-                loopEndDate = loopStartDate.addingTimeInterval(resolution)
-            }
-            
+            loopStartDate = loopStartDate.addingTimeInterval(resolution)
+            loopEndDate = loopStartDate.addingTimeInterval(resolution)
         }
     }
 }
