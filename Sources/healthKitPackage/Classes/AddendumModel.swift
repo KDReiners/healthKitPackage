@@ -13,7 +13,7 @@ public class AddendumModel: Model<Addendum> {
     public init() {
         let readOnlyFields: [String] = []
         super.init(readOnlyFields: readOnlyFields)
-        attachItems2Scans()
+//        attachItems2Scans()
     }
     override public var items: [Addendum] {
         get {
