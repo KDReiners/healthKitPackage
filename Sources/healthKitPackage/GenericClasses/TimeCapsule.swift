@@ -30,6 +30,11 @@ public class TimeCapsule<T>: GenericTimeCapsule where T: NSManagedObject {
     public init(resolution: Double, logKey: String, valueKey: String, device: String, quantityTypeKeyPath: String, model: Model<T>) {
         sliceStartDate = (model.items.first!.value(forKey: logKey) as! Date)
         sliceEndDate = (model.items.last!.value(forKey: logKey) as! Date)
+        if sliceEndDate < sliceStartDate {
+            let newEndDate = sliceStartDate
+            sliceStartDate = sliceEndDate
+            sliceEndDate = newEndDate
+        }
         self.resolution = resolution
         self.model = model
         self.logKey = logKey
