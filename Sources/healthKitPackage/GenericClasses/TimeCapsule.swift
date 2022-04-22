@@ -56,7 +56,7 @@ public class TimeCapsule<T>: GenericTimeCapsule where T: NSManagedObject {
                     return ((item.value(forKey: self.logKey) as! Date) >= loopStartDate && (item.value(forKey: self.logKey) as! Date) < loopEndDate) == true
                 }
                 else {
-                    return ((item.value(forKey: self.logKey) as! Date) >= loopStartDate && (item.value(forKey: self.logKey) as! Date) < loopEndDate && (item.value(forKey: self.filter!.columnKeyPath) as! String) == self.filter?.filterValue) == true
+                    return ((item.value(forKey: self.logKey) as! Date) >= loopStartDate && (item.value(forKey: self.logKey) as! Date) < loopEndDate && String(format: "%@", item.value(forKey: self.filter!.columnKeyPath) as! CVarArg) == self.filter!.filterValue) == true
                 }
                 
             }.forEach { item in
