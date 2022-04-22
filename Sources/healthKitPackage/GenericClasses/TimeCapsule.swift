@@ -7,9 +7,9 @@
 
 import Foundation
 import CoreData
-public class TimeCapsule<T>: GenericTimeCapsule where T: NSManagedObject {
+public class TimeCapsule: GenericTimeCapsule {
     public var slices: [slice] = []
-    public var model: Model<T>
+    public var items: [NSManagedObject]
     public var sliceStartDate: Date
     public var sliceEndDate: Date
     public var resolution: Double
@@ -18,11 +18,6 @@ public class TimeCapsule<T>: GenericTimeCapsule where T: NSManagedObject {
     public var logKey: String
     public var valueKey: String
     public var quantityTypeKeyPath: String
-    public var filter: recordFilter?
-    public struct recordFilter {
-        public var columnKeyPath: String
-        public var filterValue: String
-    }
     public struct slice {
         public var quantityType: String
         public var source: String
@@ -32,33 +27,26 @@ public class TimeCapsule<T>: GenericTimeCapsule where T: NSManagedObject {
         public var logDate: Date
         public var value: Any
     }
-    public init(resolution: Double, logKey: String, valueKey: String, device: String, quantityTypeKeyPath: String, model: Model<T>, filter: recordFilter? = nil) {
-        sliceStartDate = (model.items.first!.value(forKey: logKey) as! Date)
-        sliceEndDate = (model.items.last!.value(forKey: logKey) as! Date)
+    public init(resolution: Double, logKey: String, valueKey: String, device: String, quantityTypeKeyPath: String, items: [NSManagedObject]) {
+        sliceStartDate = (items.first!.value(forKey: logKey) as! Date)
+        sliceEndDate = (items.last!.value(forKey: logKey) as! Date)
         if sliceEndDate < sliceStartDate {
             let newEndDate = sliceStartDate
             sliceStartDate = sliceEndDate
             sliceEndDate = newEndDate
         }
         self.resolution = resolution
-        self.model = model
+        self.items = items
         self.logKey = logKey
         self.valueKey = valueKey
         self.quantityTypeKeyPath = quantityTypeKeyPath
-        self.filter = filter
     }
     public func slicer() -> Void {
         var loopStartDate = self.sliceStartDate
         var loopEndDate = loopStartDate.addingTimeInterval(resolution)
         while loopEndDate <= sliceEndDate {
-            model.items.filter { item in
-                if self.filter == nil {
-                    return ((item.value(forKey: self.logKey) as! Date) >= loopStartDate && (item.value(forKey: self.logKey) as! Date) < loopEndDate) == true
-                }
-                else {
-                    return ((item.value(forKey: self.logKey) as! Date) >= loopStartDate && (item.value(forKey: self.logKey) as! Date) < loopEndDate && String(format: "%@", item.value(forKey: self.filter!.columnKeyPath) as! CVarArg) == self.filter!.filterValue) == true
-                }
-                
+            items.filter { item in
+                return ((item.value(forKey: self.logKey) as! Date) >= loopStartDate && (item.value(forKey: self.logKey) as! Date) < loopEndDate) == true
             }.forEach { item in
                 let itemDate = item.value(forKey: self.logKey) as! Date
                 let itemValue = item.value(forKey: self.valueKey)
