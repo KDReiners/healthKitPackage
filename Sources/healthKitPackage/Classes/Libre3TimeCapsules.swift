@@ -8,7 +8,7 @@
 import Foundation
 public class Libre3TimeCapsules: TimeCapsule<Libre3primanota> {
     public typealias T = Libre3primanota
-    public init(resolution: Double) {
+    public init(resolution: Double, quantityType: String) {
         super.init(resolution: resolution, logKey: "devicetimestamp", valueKey: "glucosespathway", device: "Libre3", quantityTypeKeyPath: "Glucose",  model: Libre3Model())
         super.slicer()
     }

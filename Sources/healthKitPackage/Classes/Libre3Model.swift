@@ -19,7 +19,9 @@ public class Libre3Model: Model<Libre3primanota> {
         }
         set
         {
-            result = newValue.sorted(by: { $1.devicetimestamp ?? Date() < $0.devicetimestamp ?? Date()})
+            result = newValue.sorted(by: { $1.devicetimestamp ?? Date() < $0.devicetimestamp ?? Date()}).filter { posting in
+                return posting.device?.contains("Link") == false
+            }
         }
     }
 }

@@ -18,6 +18,11 @@ public class TimeCapsule<T>: GenericTimeCapsule where T: NSManagedObject {
     public var logKey: String
     public var valueKey: String
     public var quantityTypeKeyPath: String
+    public var filter: recordFilter?
+    public struct recordFilter {
+        public var columnKeyPath: String
+        public var filterValue: String
+    }
     public struct slice {
         public var quantityType: String
         public var source: String
@@ -27,7 +32,7 @@ public class TimeCapsule<T>: GenericTimeCapsule where T: NSManagedObject {
         public var logDate: Date
         public var value: Any
     }
-    public init(resolution: Double, logKey: String, valueKey: String, device: String, quantityTypeKeyPath: String, model: Model<T>) {
+    public init(resolution: Double, logKey: String, valueKey: String, device: String, quantityTypeKeyPath: String, model: Model<T>, filter: recordFilter? = nil) {
         sliceStartDate = (model.items.first!.value(forKey: logKey) as! Date)
         sliceEndDate = (model.items.last!.value(forKey: logKey) as! Date)
         if sliceEndDate < sliceStartDate {
@@ -40,13 +45,19 @@ public class TimeCapsule<T>: GenericTimeCapsule where T: NSManagedObject {
         self.logKey = logKey
         self.valueKey = valueKey
         self.quantityTypeKeyPath = quantityTypeKeyPath
+        self.filter = filter
     }
     public func slicer() -> Void {
         var loopStartDate = self.sliceStartDate
         var loopEndDate = loopStartDate.addingTimeInterval(resolution)
         while loopEndDate <= sliceEndDate {
             model.items.filter { item in
-                return ((item.value(forKey: self.logKey) as! Date) >= loopStartDate && (item.value(forKey: self.logKey) as! Date) < loopEndDate) == true
+                if self.filter == nil {
+                    return ((item.value(forKey: self.logKey) as! Date) >= loopStartDate && (item.value(forKey: self.logKey) as! Date) < loopEndDate) == true
+                }
+                else {
+                    return ((item.value(forKey: self.logKey) as! Date) >= loopStartDate && (item.value(forKey: self.logKey) as! Date) < loopEndDate && (item.value(forKey: self.filter!.columnKeyPath) as! String) == self.filter?.filterValue) == true
+                }
                 
             }.forEach { item in
                 let itemDate = item.value(forKey: self.logKey) as! Date
