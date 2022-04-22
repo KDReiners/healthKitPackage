@@ -6,18 +6,57 @@
 //
 
 import Foundation
+import CoreData
 public class Libre3TimeCapsules: TimeCapsule {
-    public typealias T = Libre3primanota
-    public init(resolution: Double, quantityType: String) {
-        let model = Libre3Model()
-        getRecordTypes(recordingType: 0, valueKey:  "glucosespathway", quantityTypeKeyPath:  "Glucose", model: model)
+    let model = Libre3Model()
+    var scannedLibreRecordTypes: [libreRecordType]! = nil
+    struct libreRecordType {
+        var valueKey: String
+        var quantityTypeKeyPath: String
+        var filteredItems: [NSManagedObject]
     }
-    private func getRecordTypes(recordingType: Int16, valueKey: String, quantityTypeKeyPath: String, model: Model<Libre3Model>) -> Void{
-        var filteredItems = model.items.filter { item in
-            return (item.recordingtype == 0) == true
+    public init(resolution: Double, quantityType: String) {
+        super.init(resolution: resolution)
+        scannedLibreRecordTypes = fillRecordTypes()
+        load()
+    }
+    private func load() {
+        scannedLibreRecordTypes.forEach { type in
+            super.load(logKey: "devicetimestamp", valueKey: type.valueKey, device: "Libre3", quantityTypeKeyPath: type.quantityTypeKeyPath, items: type.filteredItems)
+            super.slicer()
         }
-        super.init(resolution: resolution, logKey: "devicetimestamp", valueKey: "glucosespathway", device: "Libre3", quantityTypeKeyPath: "Glucose",  items: filteredItems)
-        super.slicer()
+    }
+    private func fillRecordTypes() -> [libreRecordType] {
+        var result = [libreRecordType]()
+        
+        // Glucosespathway
+        var newRecordType = libreRecordType(valueKey: "glucosespathway", quantityTypeKeyPath: "Glucose", filteredItems: getManagedObjects(recordingType: 0))
+        result.append(newRecordType)
+        
+        // User Observation
+        newRecordType = libreRecordType(valueKey: "glucosescan", quantityTypeKeyPath: "UserGlucoseScan", filteredItems: getManagedObjects(recordingType: 1)) // User Observation
+        result.append(newRecordType)
+        
+        // Depot Insulin
+        newRecordType = libreRecordType(valueKey: "depotinsulinunits", quantityTypeKeyPath: "depotInsulinUnits", filteredItems: getManagedObjects(recordingType: 4))
+        result.append(newRecordType)
+        
+        // Rapid Insulin
+        newRecordType = libreRecordType(valueKey: "rapidactinginsulin", quantityTypeKeyPath: "rapidactinginsulinUnits", filteredItems: getManagedObjects(recordingType: 4))
+        result.append(newRecordType)
+        // Nutrition
+        newRecordType = libreRecordType(valueKey: "nonnumericfooddata", quantityTypeKeyPath: "Nutrition", filteredItems: getManagedObjects(recordingType: 5))
+        result.append(newRecordType)
+        // Notes
+        newRecordType = libreRecordType(valueKey: "notes", quantityTypeKeyPath: "Notes", filteredItems: getManagedObjects(recordingType: 6))
+        result.append(newRecordType)
+        
+        return result
+    }
+    private func getManagedObjects(recordingType: Int) -> [NSManagedObject] {
+        return model.items.filter { item in
+            return (item.recordingtype == recordingType) == true
+        }
     }
 }
 //0 = glucoseverlauf
