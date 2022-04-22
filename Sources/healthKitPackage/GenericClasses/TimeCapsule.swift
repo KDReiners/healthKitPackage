@@ -17,6 +17,7 @@ public class TimeCapsule<T>: GenericTimeCapsule where T: NSManagedObject {
     public var successor: Array<slice>! = nil
     public var logKey: String
     public var valueKey: String
+    public var quantityTypeKey: String
     public struct slice {
         public var quantityType: String
         public var source: String
@@ -26,13 +27,14 @@ public class TimeCapsule<T>: GenericTimeCapsule where T: NSManagedObject {
         public var logDate: Date
         public var value: Any
     }
-    public init(resolution: Double, logKey: String, valueKey: String, model: Model<T>) {
+    public init(resolution: Double, logKey: String, valueKey: String, device: String, quantityTypeKey: String, model: Model<T>) {
         sliceStartDate = (model.items.first!.value(forKey: logKey) as! Date)
         sliceEndDate = (model.items.last!.value(forKey: logKey) as! Date)
         self.resolution = resolution
         self.model = model
         self.logKey = logKey
         self.valueKey = valueKey
+        self.quantityTypeKey = quantityTypeKey
     }
     public func slicer() -> Void {
         var loopStartDate = self.sliceStartDate
@@ -44,7 +46,8 @@ public class TimeCapsule<T>: GenericTimeCapsule where T: NSManagedObject {
             }.forEach { item in
                 let itemDate = item.value(forKey: self.logKey) as! Date
                 let itemValue = item.value(forKey: self.valueKey)
-                let newSlice = slice(quantityType: "", source: "", device: "", queryDateInterval: DateInterval(start: self.sliceStartDate, end: self.sliceEndDate), sliceDateInterval: DateInterval(start: loopStartDate, end: loopEndDate),  logDate: itemDate, value: itemValue)
+                let itemParent = item.value(forKey: self.quantityTypeKey)
+                let newSlice = slice(quantityType: "", source: "", device: "", queryDateInterval: DateInterval(start: self.sliceStartDate, end: self.sliceEndDate), sliceDateInterval: DateInterval(start: loopStartDate, end: loopEndDate),  logDate: itemDate, value: itemValue ?? "")
                     self.slices.append(newSlice)
                 
             }
