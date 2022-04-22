@@ -9,7 +9,7 @@ import Foundation
 public class AddendumTimeCapsules: TimeCapsule<Addendum> {
     public typealias T = Addendum
     public init(resolution: Double) {
-        super.init(resolution: resolution, logKey: "timestamp", valueKey: "name", device: "Watch", quantityTypeKey:"addendum2addendumtype", model: AddendumModel())
+        super.init(resolution: resolution, logKey: "timestamp", valueKey: "name", device: "Watch", quantityTypeKeyPath:"addendum2addendumtype", model: AddendumModel())
         super.slicer()
     }
 }
