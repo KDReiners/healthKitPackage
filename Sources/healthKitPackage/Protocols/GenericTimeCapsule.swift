@@ -8,8 +8,8 @@
 import Foundation
 import CoreData
 public protocol GenericTimeCapsule: ObservableObject {
-    associatedtype Slice
+    associatedtype T
+    var slices: [T] { get set }
     func slicer() -> Void
-    var slices: [Slice] { get set }
     var columns: [String] { get }
 }

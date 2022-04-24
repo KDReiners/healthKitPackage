@@ -23,15 +23,6 @@ public class TimeCapsule<T> : GenericTimeCapsule where T: NSManagedObject {
             return T.entity().attributeKeys
         }
     }
-    public struct Slice {
-        public var quantityType: String
-        public var source: String
-        public var device: String
-        public var queryDateInterval: DateInterval
-        public var sliceDateInterval: DateInterval
-        public var logDate: Date
-        public var value: Any
-    }
     public init(resolution: Double) {
         self.resolution = resolution
     }
