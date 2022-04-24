@@ -11,4 +11,5 @@ public protocol GenericTimeCapsule: ObservableObject {
     associatedtype T
     var slices: [T] { get set }
     func slicer() -> Void
+    var columns: [String] { get }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 import CoreData
-public class TimeCapsule: GenericTimeCapsule {
+public class TimeCapsule<T> : GenericTimeCapsule where T: NSManagedObject {
     public var slices: [slice] = []
     public var items: [NSManagedObject]! = nil
     public var sliceStartDate: Date! = nil
@@ -18,6 +18,11 @@ public class TimeCapsule: GenericTimeCapsule {
     public var logKey: String! = nil
     public var valueKey: String! = nil
     public var quantityTypeKeyPath: String! = nil
+    public var columns: [String] {
+        get {
+            return T.entity().attributeKeys
+        }
+    }
     public struct slice {
         public var quantityType: String
         public var source: String

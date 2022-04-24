@@ -6,7 +6,7 @@
 //
 
 import Foundation
-public class AddendumTimeCapsules: TimeCapsule {
+public class AddendumTimeCapsules: TimeCapsule<Addendum> {
     public typealias T = Addendum
     public override init(resolution: Double) {
 

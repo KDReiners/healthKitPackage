@@ -10,12 +10,9 @@ import CoreData
 public protocol GenericViewModel: ObservableObject {
     associatedtype T
     var items: [T] { get set }
-    var filteredItems: [T]? { get set }
     var attributes: Array<EntityAttributeInfo> { get }
     var readOnlyAttributes: Array<EntityAttributeInfo> { get }
     var readWriteAttributes: Array<EntityAttributeInfo> { get }
-    var childrenRelations: Array <NSRelationshipDescription> { get }
-    var parentRelation: NSRelationshipDescription? { get }
 }
 
 

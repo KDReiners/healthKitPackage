@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import Foundation
+import SwiftUI
 public class Libre3Model: Model<Libre3primanota> {
     @Published var result: [Libre3primanota]!
     public init() {

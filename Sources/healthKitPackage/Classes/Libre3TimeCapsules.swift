@@ -7,7 +7,8 @@
 
 import Foundation
 import CoreData
-public class Libre3TimeCapsules: TimeCapsule {
+import SwiftUI
+public class Libre3TimeCapsules: TimeCapsule<Libre3primanota> {
     let model = Libre3Model()
     var scannedLibreRecordTypes: [libreRecordType]! = nil
     struct libreRecordType {
@@ -59,8 +60,3 @@ public class Libre3TimeCapsules: TimeCapsule {
         }
     }
 }
-//0 = glucoseverlauf
-//1 = Wann hat der User geschaut
-//4 = Insulin
-//5 = Nahrung
-//6 = Notizen
