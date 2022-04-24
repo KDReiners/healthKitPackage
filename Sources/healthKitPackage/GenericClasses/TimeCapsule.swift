@@ -8,13 +8,13 @@
 import Foundation
 import CoreData
 public class TimeCapsule<T> : GenericTimeCapsule where T: NSManagedObject {
-    public var slices: [slice] = []
+    public var slices: [Slice] = []
     public var items: [NSManagedObject]! = nil
     public var sliceStartDate: Date! = nil
     public var sliceEndDate: Date! = nil
     public var resolution: Double
-    public var predecessors: Array<slice>! = nil
-    public var successor: Array<slice>! = nil
+    public var predecessors: Array<Slice>! = nil
+    public var successor: Array<Slice>! = nil
     public var logKey: String! = nil
     public var valueKey: String! = nil
     public var quantityTypeKeyPath: String! = nil
@@ -23,7 +23,7 @@ public class TimeCapsule<T> : GenericTimeCapsule where T: NSManagedObject {
             return T.entity().attributeKeys
         }
     }
-    public struct slice {
+    public struct Slice {
         public var quantityType: String
         public var source: String
         public var device: String
@@ -58,7 +58,7 @@ public class TimeCapsule<T> : GenericTimeCapsule where T: NSManagedObject {
                 let itemDate = item.value(forKey: self.logKey) as! Date
                 let itemValue = item.value(forKey: self.valueKey)
                 let  quantityType = ((self.quantityTypeKeyPath.contains(".") == true) ? item.value(forKeyPath: self.quantityTypeKeyPath) : self.quantityTypeKeyPath) as! String
-                let newSlice = slice(quantityType: quantityType, source: "", device: "", queryDateInterval: DateInterval(start: self.sliceStartDate, end: self.sliceEndDate), sliceDateInterval: DateInterval(start: loopStartDate!, end: loopEndDate),  logDate: itemDate, value: itemValue ?? "")
+                let newSlice = Slice(quantityType: quantityType, source: "", device: "", queryDateInterval: DateInterval(start: self.sliceStartDate, end: self.sliceEndDate), sliceDateInterval: DateInterval(start: loopStartDate!, end: loopEndDate),  logDate: itemDate, value: itemValue ?? "")
                     self.slices.append(newSlice)
                 
             }
