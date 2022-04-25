@@ -49,7 +49,7 @@ public class TimeCapsule<T> : GenericTimeCapsule where T: NSManagedObject {
                 let itemDate = item.value(forKey: self.logKey) as! Date
                 let itemValue = item.value(forKey: self.valueKey)
                 let  quantityType = ((self.quantityTypeKeyPath.contains(".") == true) ? item.value(forKeyPath: self.quantityTypeKeyPath) : self.quantityTypeKeyPath) as! String
-                let newSlice = Slice(quantityType: quantityType, source: "", device: "", queryDateInterval: DateInterval(start: self.sliceStartDate, end: self.sliceEndDate), sliceDateInterval: DateInterval(start: loopStartDate!, end: loopEndDate),  logDate: itemDate, value: (itemValue as! String))
+                let newSlice = Slice(quantityType: quantityType, source: "", device: "", queryDateinterval: DateInterval(start: self.sliceStartDate, end: self.sliceEndDate), sliceDateInterval: DateInterval(start: loopStartDate!, end: loopEndDate),  logDate: itemDate, value: itemValue ?? "")
                     self.slices.append(newSlice)
                 
             }

@@ -6,20 +6,23 @@
 //
 
 import Foundation
-public struct Slice: Hashable {
-    public var ID = UUID()
+import SwiftUI
+public class Slice: Identifiable {
     public var quantityType: String
     public var source: String
     public var device: String
     public var queryDateInterval: DateInterval
     public var sliceDateInterval: DateInterval
     public var logDate: Date
-    public var value: String
+    public var value: Any
+    init(quantityType: String, source: String, device: String, queryDateinterval: DateInterval, sliceDateInterval: DateInterval, logDate: Date, value: Any) {
+        self.quantityType = quantityType
+        self.source = source
+        self.device = device
+        self.queryDateInterval = queryDateinterval
+        self.sliceDateInterval = sliceDateInterval
+        self.logDate = logDate
+        self.value = value
+    }
     
-    public static func == (lhs: Slice, rhs: Slice) -> Bool {
-        return lhs.hashValue == rhs.hashValue 
-    }
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(ID)
-    }
 }
