@@ -9,7 +9,7 @@ import Foundation
 import CoreData
 public protocol GenericTimeCapsule: ObservableObject {
     associatedtype T
-    var slices: [T] { get set }
+    var slices: Array<T>{ get set }
     func slicer() -> Void
     var columns: [String] { get }
 }
