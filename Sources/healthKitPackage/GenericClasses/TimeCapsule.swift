@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 public class TimeCapsule<T> : GenericTimeCapsule where T: NSManagedObject {
-    public var slices: [Slice] = []
+    public var slices: Array<Slice> = []
     public var items: [NSManagedObject]! = nil
     public var sliceStartDate: Date! = nil
     public var sliceEndDate: Date! = nil
