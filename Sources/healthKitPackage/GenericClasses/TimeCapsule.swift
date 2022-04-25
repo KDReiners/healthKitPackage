@@ -20,7 +20,7 @@ public class TimeCapsule<T> : GenericTimeCapsule where T: NSManagedObject {
     public var quantityTypeKeyPath: String! = nil
     public var columns: [String] {
         get {
-            return T.entity().attributeKeys
+            return [String] (T.entity().attributesByName.keys)
         }
     }
     public init(resolution: Double) {
