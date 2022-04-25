@@ -14,7 +14,7 @@ public struct Slice: Hashable {
     public var queryDateInterval: DateInterval
     public var sliceDateInterval: DateInterval
     public var logDate: Date
-    public var value: Any
+    public var value: String
     
     public static func == (lhs: Slice, rhs: Slice) -> Bool {
         return lhs.hashValue == rhs.hashValue 
