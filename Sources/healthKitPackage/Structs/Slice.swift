@@ -7,6 +7,7 @@
 
 import Foundation
 public struct Slice {
+    public var ID = UUID()
     public var quantityType: String
     public var source: String
     public var device: String
