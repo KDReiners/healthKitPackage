@@ -23,8 +23,8 @@ public class TimeCapsule<T> : GenericTimeCapsule where T: NSManagedObject {
             return [String] (T.entity().attributesByName.keys)
         }
     }
-    public var relations:[String: NSRelationshipDescription] {
-        return T.entity().relationshipsByName
+    public var parentRelation:[String] {
+        return T.entity().toOneRelationshipKeys
     }
     public init(resolution: Double) {
         self.resolution = resolution
