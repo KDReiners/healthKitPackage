@@ -10,7 +10,7 @@ import CoreData
 import SwiftUI
 public class Libre3TimeCapsules: TimeCapsule<Libre3primanota> {
     let model = Libre3Model()
-    var scannedLibreRecordTypes: [libreRecordType]! = nil
+    var scannedRecordTypes: [libreRecordType]! = nil
     struct libreRecordType {
         var valueKey: String
         var quantityTypeKeyPath: String
@@ -18,11 +18,11 @@ public class Libre3TimeCapsules: TimeCapsule<Libre3primanota> {
     }
     public init(resolution: Double, quantityType: String) {
         super.init(resolution: resolution)
-        scannedLibreRecordTypes = fillRecordTypes()
+        scannedRecordTypes = fillRecordTypes()
         load()
     }
     private func load() {
-        scannedLibreRecordTypes.forEach { type in
+        scannedRecordTypes.forEach { type in
             super.load(logKey: "devicetimestamp", valueKey: type.valueKey, device: "Libre3", quantityTypeKeyPath: type.quantityTypeKeyPath, items: type.filteredItems)
             super.slicer()
         }
