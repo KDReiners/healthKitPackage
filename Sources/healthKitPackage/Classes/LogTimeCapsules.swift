@@ -15,7 +15,7 @@ public class LogTimeCapsules: TimeCapsule<Log> {
         load()
     }
     private func load() {
-        super.load(logKey: "timeStamp", valueKey:"value" , device: "healthKit", quantityTypeKeyPath: "log2quantitytype", items: model.items)
+        super.load(logKey: "timeStamp", valueKey:"value" , device: "healthKit", quantityTypeKeyPath: "log2quantitytype.hk_quantitytype", items: model.items)
         super.slicer()
     }
 }
