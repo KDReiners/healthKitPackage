@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 import SwiftUI
-public class Lazy <Libre3TimeCapsules>: TimeCapsule<Libre3primanota> {
+public class Libre3TimeCapsules: TimeCapsule<Libre3primanota> {
     let model = Libre3Model()
     var scannedRecordTypes: [libreRecordType]! = nil
     struct libreRecordType {
