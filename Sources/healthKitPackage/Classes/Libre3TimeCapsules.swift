@@ -16,7 +16,7 @@ public class Libre3TimeCapsules: TimeCapsule<Libre3primanota> {
         var quantityTypeKeyPath: String
         var filteredItems: [NSManagedObject]
     }
-    public required init(resolution: Double, quantityType: String) {
+    public init(resolution: Double, quantityType: String) {
         super.init(resolution: resolution)
         scannedRecordTypes = fillRecordTypes()
         load()

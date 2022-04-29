@@ -8,7 +8,7 @@
 import Foundation
 public class AddendumTimeCapsules: TimeCapsule<Addendum> {
     public typealias T = Addendum
-    public required init(resolution: Double, quantityType: String = "") {
+    public override init(resolution: Double) {
 
         super.init(resolution: resolution)
         super.load(logKey: "timestamp", valueKey: "name", device: "Watch", quantityTypeKeyPath:"addendum2addendumtype.name", items: AddendumModel().items)
