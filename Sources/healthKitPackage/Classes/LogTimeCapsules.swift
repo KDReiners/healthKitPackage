@@ -10,7 +10,7 @@ import CoreData
 import SwiftUI
 public class LogTimeCapsules: TimeCapsule<Log> {
     let model = LogModel()
-    public init(resolution: Double, quantityType: String) {
+    public required init(resolution: Double, quantityType: String = "") {
         super.init(resolution: resolution)
         load()
     }

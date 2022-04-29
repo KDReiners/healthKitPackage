@@ -26,7 +26,7 @@ public class TimeCapsule<T> : GenericTimeCapsule where T: NSManagedObject {
     public var parentRelations: [String] {
         return T.entity().toOneRelationshipKeys
     }
-    public init(resolution: Double) {
+    public required init(resolution: Double, quantityType: String = "") {
         self.resolution = resolution
     }
     public func load(logKey: String, valueKey: String, device: String, quantityTypeKeyPath: String, items: [NSManagedObject]) ->Void {
