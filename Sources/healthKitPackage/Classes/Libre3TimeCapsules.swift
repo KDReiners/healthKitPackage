@@ -18,8 +18,9 @@ public class Libre3TimeCapsules: TimeCapsule<Libre3primanota> {
     }
     public init(resolution: Double, quantityType: String) {
         super.init(resolution: resolution)
+        load()
     }
-    public func load() {
+    private func load() {
         scannedRecordTypes = fillRecordTypes()
         scannedRecordTypes.forEach { type in
             super.load(logKey: "devicetimestamp", valueKey: type.valueKey, device: "Libre3", quantityTypeKeyPath: type.quantityTypeKeyPath, items: type.filteredItems)
