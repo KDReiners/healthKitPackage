@@ -14,4 +14,10 @@ public extension Date {
         let date = dateStringFormatter.date(from: dateString)!
         self.init(timeInterval:0, since:date)
     }
+    func nearestClusterTime(resolution: Int) -> Date? {
+            var components = NSCalendar.current.dateComponents([.minute], from: self)
+            let minute = components.minute ?? 0
+            components.minute = minute >= resolution/60 ? 60 - minute : -minute
+            return Calendar.current.date(byAdding: components, to: self)
+        }
 }
