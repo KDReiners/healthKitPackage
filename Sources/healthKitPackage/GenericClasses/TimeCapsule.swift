@@ -44,7 +44,7 @@ public class TimeCapsule<T> : GenericTimeCapsule where T: NSManagedObject {
     }
     public func slicer() -> Void {
         var loopStartDate = self.sliceStartDate.nearestClusterTime(resolution: Int(self.resolution as Double))
-        var loopEndDate = loopStartDate!.addingTimeInterval(resolution)
+        var loopEndDate = loopStartDate!.addingTimeInterval(resolution).nearestClusterTime(resolution: Int(self.resolution as Double))!
         while loopEndDate <= sliceEndDate {
             self.items.filter { item in
                 return ((item.value(forKey: self.logKey) as! Date) >= loopStartDate! && (item.value(forKey: self.logKey) as! Date) < loopEndDate) == true
