@@ -11,12 +11,12 @@ public class TimeLord {
     public static var universe = Dictionary<Planet, [Slice]>()
     public static func addToTimeSlices(slices: [Slice]) {
         arraytimeSlices.append(contentsOf: slices)
+        arraytimeSlices = Array(Set(arraytimeSlices))
     }
     public static func returnHistory() -> Dictionary<DateInterval,[Slice]> {
         let result = Dictionary(grouping: Set(arraytimeSlices)) { (slice) -> DateInterval in
             return slice.sliceDateInterval
         }
-        print("Done")
         return result
     }
 }
