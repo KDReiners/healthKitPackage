@@ -59,6 +59,7 @@ public class TimeCapsule<T> : GenericTimeCapsule where T: NSManagedObject {
             loopStartDate = loopStartDate!.addingTimeInterval(resolution)
             loopEndDate = loopStartDate!.addingTimeInterval(resolution)
         }
+        TimeLord.addToUniverse(slices: self.slices)
     }
 }
 
