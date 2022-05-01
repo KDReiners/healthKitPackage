@@ -64,5 +64,6 @@ public class TimeCapsule<T> : GenericTimeCapsule where T: NSManagedObject {
         
         TimeLord.addToTimeSlices(slices: self.slices)
     }
+    let result = TimeLord.returnHistory()
 }
 

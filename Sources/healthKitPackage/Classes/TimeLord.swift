@@ -12,4 +12,10 @@ public class TimeLord {
     public static func addToTimeSlices(slices: [Slice]) {
         timeSlices.append(contentsOf: slices)
     }
+    public static func returnHistory() -> Dictionary<DateInterval,[Slice]> {
+        return Dictionary(grouping: timeSlices) { (slice) -> DateInterval in
+            return slice.sliceDateInterval
+        }
+
+    }
 }
