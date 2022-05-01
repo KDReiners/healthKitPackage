@@ -17,6 +17,8 @@ public class TimeLord {
         let result = Dictionary(grouping: Set(arraytimeSlices)) { (slice) -> DateInterval in
             return slice.sliceDateInterval
         }
+        print("ArrayToTimeSlices Count: \(arraytimeSlices.count)!")
+        print("Resulting Dictionary Count: \(result.count)!")
         return result
     }
 }
