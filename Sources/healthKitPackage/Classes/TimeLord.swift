@@ -7,9 +7,9 @@
 
 import Foundation
 public class TimeLord {
-    var universe = Dictionary<String, [Slice]>()
-    public static func addToUniverse(slices: [Slice]) {
-        
+    public static var universe = Dictionary<Planet, [Slice]>()
+    public static func addToUniverse(planet: Planet, slices: [Slice]) {
+        universe[planet] = slices
     }
     
 }
