@@ -51,4 +51,21 @@ public struct BaseServices
         format.dateFormat = "dd-MM-yyyy HH:mm"
         return format.date(from: dateString)
     }
+    static func tryCast(_ val:Any) -> String {
+        let valueFormatter: NumberFormatter = {
+            let formatter = NumberFormatter()
+            formatter.numberStyle = .decimal
+            formatter.minimumFractionDigits = 2
+            formatter.maximumFractionDigits = 2
+                return formatter
+            }()
+        switch val {
+        case is String, is NSString:
+            return val as! String
+        case is Int, is Double:
+            return valueFormatter.string(from: val as! NSNumber)!
+        default:
+            return ""
+        }
+    }
 }

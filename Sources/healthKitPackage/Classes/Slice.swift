@@ -7,7 +7,20 @@
 
 import Foundation
 import SwiftUI
-public class Slice: Identifiable {
+public class Slice: Identifiable, Hashable {
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine([quantityType, source, device, DateFormatter().string(from: sliceDateInterval.start)])
+    }
+    public static func == (lhs: Slice, rhs: Slice) -> Bool {
+            return
+        lhs.quantityType ==  rhs.quantityType &&
+        lhs.source == rhs.source &&
+        lhs.device == rhs.device &&
+        lhs.queryDateInterval == rhs.queryDateInterval &&
+        lhs.sliceDateInterval == rhs.sliceDateInterval &&
+        lhs.logDate == rhs.logDate &&
+        BaseServices.tryCast( lhs.value) == BaseServices.tryCast(_: rhs.value)
+    }
     public var quantityType: String
     public var source: String
     public var device: String

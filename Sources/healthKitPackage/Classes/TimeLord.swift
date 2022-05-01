@@ -7,13 +7,13 @@
 
 import Foundation
 public class TimeLord {
-    public static var timeSlices = [Slice]()
+    public static var arraytimeSlices = [Slice]()
     public static var universe = Dictionary<Planet, [Slice]>()
     public static func addToTimeSlices(slices: [Slice]) {
-        timeSlices.append(contentsOf: slices)
+        arraytimeSlices.append(contentsOf: slices)
     }
     public static func returnHistory() -> Dictionary<DateInterval,[Slice]> {
-        let result = Dictionary(grouping: timeSlices) { (slice) -> DateInterval in
+        let result = Dictionary(grouping: Set(arraytimeSlices)) { (slice) -> DateInterval in
             return slice.sliceDateInterval
         }
         print("Done")
