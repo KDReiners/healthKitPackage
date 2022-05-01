@@ -51,7 +51,7 @@ public struct BaseServices
         format.dateFormat = "dd-MM-yyyy HH:mm"
         return format.date(from: dateString)
     }
-    static func tryCast(_ val:Any) -> String {
+    public static func tryCast(_ val:Any) -> String {
         let valueFormatter: NumberFormatter = {
             let formatter = NumberFormatter()
             formatter.numberStyle = .decimal
