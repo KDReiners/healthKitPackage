@@ -13,9 +13,10 @@ public class TimeLord {
         timeSlices.append(contentsOf: slices)
     }
     public static func returnHistory() -> Dictionary<DateInterval,[Slice]> {
-        return Dictionary(grouping: timeSlices) { (slice) -> DateInterval in
+        let result = Dictionary(grouping: timeSlices) { (slice) -> DateInterval in
             return slice.sliceDateInterval
         }
-
+        print("Done")
+        return result
     }
 }
