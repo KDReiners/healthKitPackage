@@ -68,4 +68,11 @@ public struct BaseServices
             return ""
         }
     }
+    public static func gatherAllLoggings(resolution: Double, completion: (Bool) ->()) {
+        AddendumTimeCapsules(resolution: resolution)
+        Libre3TimeCapsules(resolution: resolution)
+        LogTimeCapsules(resolution: resolution)
+        completion(true)
+    }
+    
 }

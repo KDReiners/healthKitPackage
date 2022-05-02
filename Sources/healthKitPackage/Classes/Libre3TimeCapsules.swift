@@ -16,7 +16,7 @@ public class Libre3TimeCapsules: TimeCapsule<Libre3primanota> {
         var quantityTypeKeyPath: String
         var filteredItems: [NSManagedObject]
     }
-    public init(resolution: Double, quantityType: String) {
+    public override init(resolution: Double) {
         super.init(resolution: resolution)
         load()
     }
