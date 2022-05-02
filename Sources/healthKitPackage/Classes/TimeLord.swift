@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 public class TimeLord {
     public static var arraytimeSlices = [Slice]()
     public static var universe = Dictionary<Planet, [Slice]>()
@@ -19,6 +20,11 @@ public class TimeLord {
         }
         print("ArrayToTimeSlices Count: \(arraytimeSlices.count)!")
         print("Resulting Dictionary Count: \(result.count)!")
+        result.forEach {slices in
+            for slice in slices.value  {
+                print("QuantityType: \(slice.quantityType)")
+            }
+        }
         return result
     }
 }
