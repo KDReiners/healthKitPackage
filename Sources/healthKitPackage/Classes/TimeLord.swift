@@ -8,17 +8,16 @@
 import Foundation
 import SwiftUI
 public class TimeLord {
-    public static var arraytimeSlices = [Slice]()
-    public static var universe = Dictionary<Planet, [Slice]>()
+    public static var timeSlices = [Slice]()
     public static func addToTimeSlices(slices: [Slice]) {
-        arraytimeSlices.append(contentsOf: slices)
-        arraytimeSlices = Array(Set(arraytimeSlices))
+        timeSlices.append(contentsOf: slices)
+        timeSlices = Array(Set(timeSlices))
     }
     public static func returnHistory() -> Dictionary<DateInterval,[Slice]> {
-        let result = Dictionary(grouping: Set(arraytimeSlices)) { (slice) -> DateInterval in
+        let result = Dictionary(grouping: Set(timeSlices)) { (slice) -> DateInterval in
             return slice.sliceDateInterval
         }
-        print("ArrayToTimeSlices Count: \(arraytimeSlices.count)!")
+        print("ArrayToTimeSlices Count: \(timeSlices.count)!")
         print("Resulting Dictionary Count: \(result.count)!")
         result.forEach {slices in
             for slice in slices.value  {

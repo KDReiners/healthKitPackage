@@ -43,7 +43,6 @@ public class TimeCapsule<T> : GenericTimeCapsule where T: NSManagedObject {
         self.quantityTypeKeyPath = quantityTypeKeyPath
     }
     public func slicer() -> Void {
-        var planet = Planet(Source: T.className(), QuantityType: T.className())
         var loopStartDate = self.sliceStartDate.nearestClusterTime(resolution: Int(self.resolution as Double))
         var loopEndDate = loopStartDate!.addingTimeInterval(resolution).nearestClusterTime(resolution: Int(self.resolution as Double))!
         while loopEndDate <= sliceEndDate {
@@ -53,7 +52,6 @@ public class TimeCapsule<T> : GenericTimeCapsule where T: NSManagedObject {
                 let itemDate = item.value(forKey: self.logKey) as! Date
                 let itemValue = item.value(forKey: self.valueKey)
                 let  quantityType = ((self.quantityTypeKeyPath.contains("2") == true) ? item.value(forKeyPath: self.quantityTypeKeyPath) : self.quantityTypeKeyPath) as! String
-                planet.QuantityType = quantityType
                 let newSlice = Slice(quantityType: quantityType, source: "", device: "", queryDateinterval: DateInterval(start: self.sliceStartDate, end: self.sliceEndDate), sliceDateInterval: DateInterval(start: loopStartDate!, end: loopEndDate),  logDate: itemDate, value: itemValue ?? "")
                     self.slices.append(newSlice)
                 

@@ -37,5 +37,4 @@ public class Slice: Identifiable, Hashable {
         self.logDate = logDate
         self.value = value
     }
-    
 }
