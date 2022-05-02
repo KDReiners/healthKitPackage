@@ -22,7 +22,7 @@ public class TimeLord {
         print("Resulting Dictionary Count: \(result.count)!")
         result.forEach {slices in
             for slice in slices.value  {
-                print("QuantityType: \(slice.quantityType)")
+                print("SliceLogTime: \(slice.sliceDateInterval.start) QuantityType: \(slice.quantityType) Value: \(slice.value)")
             }
         }
         return result
