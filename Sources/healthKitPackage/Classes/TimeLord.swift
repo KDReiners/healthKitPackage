@@ -26,4 +26,20 @@ public class TimeLord {
         }
         return result
     }
+    public static func getDistinctQuantityTypes() -> [String] {
+        var result = [String]()
+        timeSlices.forEach { slice in
+            if !result.contains(slice.quantityType) {
+                result.append(slice.quantityType)
+            }
+        }
+        return result
+    }
+    public static fun giveValue(dateInterval: DateInterval, quantityType: String, value: any) {
+        timeSlices.filter { slice in
+            return slice.quantityType == Quantitytype
+        }.forEach { slice in
+            
+        }
+    }
 }
