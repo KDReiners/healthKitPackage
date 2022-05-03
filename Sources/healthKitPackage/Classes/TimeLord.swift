@@ -35,11 +35,4 @@ public class TimeLord {
         }
         return result
     }
-    public static fun giveValue(dateInterval: DateInterval, quantityType: String, value: any) {
-        timeSlices.filter { slice in
-            return slice.quantityType == Quantitytype
-        }.forEach { slice in
-            
-        }
-    }
 }
