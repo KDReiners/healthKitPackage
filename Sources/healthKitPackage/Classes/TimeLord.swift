@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 public class TimeLord {
     public static var timeSlices = [Slice]()
+    public static var mlTree: Tree<String>?
     public static func addToTimeSlices(slices: [Slice]) {
         timeSlices.append(contentsOf: slices)
         timeSlices = Array(Set(timeSlices))
@@ -34,5 +35,31 @@ public class TimeLord {
             }
         }
         return result
+    }
+    internal static func createMlTree() async -> Tree<String> {
+        return await Task {
+            var master = Tree(value: "Root", children: [Tree<String>]())
+            BaseServices.gatherAllLoggings(resolution: 3600, completion: { (success) -> Void in
+                if success {
+                    let columns = TimeLord.getDistinctQuantityTypes()
+                    TimeLord.returnHistory().forEach { timeCluster in
+                        var newTree = Tree(value: "\(timeCluster.key.start)", children: [Tree<String>]())
+                        columns.forEach { col in
+                            let fittingSlices = timeCluster.value.filter( {$0.quantityType == col })
+                            if fittingSlices.count != 0 {
+                                var child = Tree(value: col, children: [Tree<String>]())
+                                timeCluster.value.filter( {$0.quantityType == col }).forEach { slice in
+                                    let sibling = Tree(value: "\(slice.value)", children: [Tree<String>]())
+                                    child.children?.append(sibling)
+                                }
+                                newTree.children?.append(child)
+                            }
+                        }
+                        master.children?.append(newTree)
+                    }
+                }
+            })
+            return master
+        }.value
     }
 }
