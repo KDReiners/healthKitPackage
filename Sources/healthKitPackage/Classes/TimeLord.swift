@@ -9,7 +9,14 @@ import Foundation
 import SwiftUI
 public class TimeLord {
     public static var timeSlices = [Slice]()
-    public static var mlTree: Tree<String>?
+    private static var _mlTree: Tree<String>?
+    public static var mlTree: Tree<String> {
+        get {
+            if _mlTree == nil {
+            }
+            return _mlTree!
+        }
+    }
     public static func addToTimeSlices(slices: [Slice]) {
         timeSlices.append(contentsOf: slices)
         timeSlices = Array(Set(timeSlices))
@@ -36,8 +43,8 @@ public class TimeLord {
         }
         return result
     }
-    internal static func createMlTree() async -> Tree<String> {
-        return await Task {
+    public static func createMlTree() async -> Void {
+        _mlTree = await Task {
             var master = Tree(value: "Root", children: [Tree<String>]())
             BaseServices.gatherAllLoggings(resolution: 3600, completion: { (success) -> Void in
                 if success {
