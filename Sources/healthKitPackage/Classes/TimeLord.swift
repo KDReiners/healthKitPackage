@@ -13,8 +13,10 @@ public class TimeLord {
     public static var mlTree: Tree<String> {
         get {
             if _mlTree == nil {
+                return Tree<String>(value:"leer")
             }
             return _mlTree!
+            
         }
     }
     public static func addToTimeSlices(slices: [Slice]) {
